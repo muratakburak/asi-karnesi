@@ -15,6 +15,8 @@ function createUrl() {
 export const BASE_URL = createUrl()
 export var APIKEY = null;
 
+export const clientId = "141610256272-jufso6co8s7bpq21hhaohkj36lu812nn.apps.googleusercontent.com";
+
 export var HEADER = {
     'APIKEY': APIKEY
 };
