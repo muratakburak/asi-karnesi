@@ -5,8 +5,6 @@ import {Button} from "primereact/button";
 import {put_storage, get_storage} from "../services/StorageUtil";
 
 
-// import '../App.css';
-
 export class Home extends React.Component {
 
     constructor() {
