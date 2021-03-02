@@ -206,7 +206,8 @@ export class MyFriends extends React.Component {
                 <DataTable
                     value={this.state.friends}
                     selectionMode="multiple"
-                    selectionKeys={this.state.selected_friends}
+                    // selectionKeys={this.state.selected_friends}
+                    selection={this.state.selected_friends}
                     onSelectionChange={e => this.setState({selected_friends : e.value})}
                     metaKeySelection={false}
                     // metaKeySelection
