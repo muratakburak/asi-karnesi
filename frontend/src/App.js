@@ -7,38 +7,35 @@ import PersonalBar from "./pages/bar-components/PersonalBar";
 
 class App extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
+    constructor() {
+        super();
+        this.state = {};
 
-    };
+        this.componentDidMount = this.componentDidMount.bind(this);
+    }
 
-    this.componentDidMount = this.componentDidMount.bind(this);
-  }
+    async componentDidMount() {
 
-  async componentDidMount() {
-
-  }
+    }
 
 
+    render() {
 
 
+        return (
+            <div>
+                <div style={{height: "7vh"}}>
 
+                    {/*This area can include some information about logged in user!! like name picture etc.*/}
+                    <PersonalBar/>
 
-  render() {
+                </div>
+                <hr/>
 
+            </div>
 
-    return (
-        <div>
-          <div style={{height:"6vh"}}>
-
-This area can include some information about logged in user!! like name picture etc.
-            <PersonalBar/>
-        </div>
-            <hr/>
-        </div>
-
-    )
-  }
+        )
+    }
 }
+
 export default App

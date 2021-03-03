@@ -1,6 +1,7 @@
 import React from 'react';
 import {TabPanel, TabView} from "primereact/tabview";
 import MyFriends from "./my-page-components/MyFriends";
+import MyCodes from "./my-page-components/MyCodes";
 // import '../App.css';
 
 export class MyPage extends React.Component {
@@ -44,10 +45,8 @@ export class MyPage extends React.Component {
                         architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
                     voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
                     </TabPanel>
-                    <TabPanel header="Header III" leftIcon="pi pi-search" rightIcon="pi pi-cog">
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-                    Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    <TabPanel header="My Codes" leftIcon="pi pi-search" rightIcon="pi pi-cog">
+                        <MyCodes />
                     </TabPanel>
                 </TabView>
             </div>
