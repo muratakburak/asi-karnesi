@@ -66,6 +66,9 @@ class PersonalBar extends React.Component {
 
     return (
         <div style={{margin:"10px"}}>
+
+                                This area can include some information about logged in user!! like name picture etc.
+
                 <GoogleLogin
                     clientId={clientId}
                     buttonText="Login"

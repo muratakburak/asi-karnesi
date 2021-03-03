@@ -26,7 +26,6 @@ class App extends React.Component {
             <div>
                 <div style={{height: "7vh"}}>
 
-                    {/*This area can include some information about logged in user!! like name picture etc.*/}
                     <PersonalBar/>
 
                 </div>
