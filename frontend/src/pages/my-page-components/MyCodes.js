@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 
-import {BASE_URL, HEADER,BUILD_HEADER} from "../../services/base_service";
+import {BASE_URL, HEADER, BUILD_HEADER} from "../../services/base_service";
 
 // import {clientId} from "../../services/base_service";
 import {Button} from "primereact/button";
@@ -22,8 +22,8 @@ export class MyCodes extends React.Component {
 
         this.state = {
 
-            my_vaccines : [],
-            selected_vaccines : [],
+            my_vaccines: [],
+            selected_vaccines: [],
 
             // login : new Login(),
 
@@ -34,157 +34,186 @@ export class MyCodes extends React.Component {
     }
 
 
-     componentDidMount() {
-    let google_user = get_storage("google_user");
+    componentDidMount() {
+        let google_user = get_storage("google_user");
 
-    console.log(google_user)
+        console.log(google_user)
         let data = {
-                "my_vaccines":[
-                    {  "id" : 0,"name": "COVID-19", "date" : "15.02.2019", "dose": "1", "vaccine_point" : "Ankara Merkez", "expires_in" : "364"} ,
-                    {  "id" : 1,"name": "COVID-20", "date" : "15.02.2020", "dose": "1", "vaccine_point" : "Istranbul Merkez", "expires_in" : "255"} ,
-                    {  "id" : 2,"name": "COVID-21", "date" : "15.02.2021", "dose": "1", "vaccine_point" : "Eskisehir Merkez", "expires_in" : "321"} ,
-                    {  "id" : 3,"name": "COVID-22", "date" : "15.02.2022", "dose": "1", "vaccine_point" : "Adana Merkez", "expires_in" : "0"} ,
-                ]
+            "my_vaccines": [
+                {
+                    "id": 0,
+                    "name": "COVID-19",
+                    "date": "15.02.2019",
+                    "dose": "1",
+                    "vaccine_point": "Ankara Merkez",
+                    "expires_in": "364"
+                },
+                {
+                    "id": 1,
+                    "name": "COVID-20",
+                    "date": "15.02.2020",
+                    "dose": "1",
+                    "vaccine_point": "Istranbul Merkez",
+                    "expires_in": "255"
+                },
+                {
+                    "id": 2,
+                    "name": "COVID-21",
+                    "date": "15.02.2021",
+                    "dose": "1",
+                    "vaccine_point": "Eskisehir Merkez",
+                    "expires_in": "321"
+                },
+                {
+                    "id": 3,
+                    "name": "COVID-22",
+                    "date": "15.02.2022",
+                    "dose": "1",
+                    "vaccine_point": "Adana Merkez",
+                    "expires_in": "0"
+                },
+            ]
         };
 
-    // let test_data = {
-    //     "root": [
-    //         {
-    //             "key": "0",
-    //             "data": {"name": "Applications", "size": "100kb", "type": "Folder"},
-    //             "children": [{
-    //                 "key": "0-0",
-    //                 "data": {"name": "React", "size": "25kb", "type": "Folder"},
-    //                 "children": [{
-    //                     "key": "0-0-0",
-    //                     "data": {"name": "react.app", "size": "10kb", "type": "Application"}
-    //                 }, {
-    //                     "key": "0-0-1",
-    //                     "data": {"name": "native.app", "size": "10kb", "type": "Application"}
-    //                 }, {"key": "0-0-2", "data": {"name": "mobile.app", "size": "5kb", "type": "Application"}}]
-    //             }, {"key": "0-1", "data": {"name": "editor.app", "size": "25kb", "type": "Application"}}, {
-    //                 "key": "0-2",
-    //                 "data": {"name": "settings.app", "size": "50kb", "type": "Application"}
-    //             }]
-    //         },
-    //         {
-    //             "key": "1",
-    //             "data": {"name": "Cloud", "size": "20kb", "type": "Folder"},
-    //             "children": [{
-    //                 "key": "1-0",
-    //                 "data": {"name": "backup-1.zip", "size": "10kb", "type": "Zip"}
-    //             }, {"key": "1-1", "data": {"name": "backup-2.zip", "size": "10kb", "type": "Zip"}}]
-    //         },
-    //         {
-    //             "key": "2",
-    //             "data": {"name": "Desktop", "size": "150kb", "type": "Folder"},
-    //             "children": [{
-    //                 "key": "2-0",
-    //                 "data": {"name": "note-meeting.txt", "size": "50kb", "type": "Text"}
-    //             }, {"key": "2-1", "data": {"name": "note-todo.txt", "size": "100kb", "type": "Text"}}]
-    //         },
-    //         {
-    //             "key": "3",
-    //             "data": {"name": "Documents", "size": "75kb", "type": "Folder"},
-    //             "children": [{
-    //                 "key": "3-0",
-    //                 "data": {"name": "Work", "size": "55kb", "type": "Folder"},
-    //                 "children": [{
-    //                     "key": "3-0-0",
-    //                     "data": {"name": "Expenses.doc", "size": "30kb", "type": "Document"}
-    //                 }, {"key": "3-0-1", "data": {"name": "Resume.doc", "size": "25kb", "type": "Resume"}}]
-    //             }, {
-    //                 "key": "3-1",
-    //                 "data": {"name": "Home", "size": "20kb", "type": "Folder"},
-    //                 "children": [{"key": "3-1-0", "data": {"name": "Invoices", "size": "20kb", "type": "Text"}}]
-    //             }]
-    //         },
-    //         {
-    //             "key": "4",
-    //             "data": {"name": "Downloads", "size": "25kb", "type": "Folder"},
-    //             "children": [{
-    //                 "key": "4-0",
-    //                 "data": {"name": "Spanish", "size": "10kb", "type": "Folder"},
-    //                 "children": [{
-    //                     "key": "4-0-0",
-    //                     "data": {"name": "tutorial-a1.txt", "size": "5kb", "type": "Text"}
-    //                 }, {"key": "4-0-1", "data": {"name": "tutorial-a2.txt", "size": "5kb", "type": "Text"}}]
-    //             }, {
-    //                 "key": "4-1",
-    //                 "data": {"name": "Travel", "size": "15kb", "type": "Text"},
-    //                 "children": [{
-    //                     "key": "4-1-0",
-    //                     "data": {"name": "Hotel.pdf", "size": "10kb", "type": "PDF"}
-    //                 }, {"key": "4-1-1", "data": {"name": "Flight.pdf", "size": "5kb", "type": "PDF"}}]
-    //             }]
-    //         },
-    //         {
-    //             "key": "5",
-    //             "data": {"name": "Main", "size": "50kb", "type": "Folder"},
-    //             "children": [{"key": "5-0", "data": {"name": "bin", "size": "50kb", "type": "Link"}}, {
-    //                 "key": "5-1",
-    //                 "data": {"name": "etc", "size": "100kb", "type": "Link"}
-    //             }, {"key": "5-2", "data": {"name": "var", "size": "100kb", "type": "Link"}}]
-    //         },
-    //         {
-    //             "key": "6",
-    //             "data": {"name": "Other", "size": "5kb", "type": "Folder"},
-    //             "children": [{"key": "6-0", "data": {"name": "todo.txt", "size": "3kb", "type": "Text"}}, {
-    //                 "key": "6-1",
-    //                 "data": {"name": "logo.png", "size": "2kb", "type": "Picture"}
-    //             }]
-    //         },
-    //         {
-    //             "key": "7",
-    //             "data": {"name": "Pictures", "size": "150kb", "type": "Folder"},
-    //             "children": [{
-    //                 "key": "7-0",
-    //                 "data": {"name": "barcelona.jpg", "size": "90kb", "type": "Picture"}
-    //             }, {"key": "7-1", "data": {"name": "primeng.png", "size": "30kb", "type": "Picture"}}, {
-    //                 "key": "7-2",
-    //                 "data": {"name": "prime.jpg", "size": "30kb", "type": "Picture"}
-    //             }]
-    //         },
-    //         {
-    //             "key": "8",
-    //             "data": {"name": "Videos", "size": "1500kb", "type": "Folder"},
-    //             "children": [{
-    //                 "key": "8-0",
-    //                 "data": {"name": "primefaces.mkv", "size": "1000kb", "type": "Video"}
-    //             }, {"key": "8-1", "data": {"name": "intro.avi", "size": "500kb", "type": "Video"}}]
-    //         }
-    //     ]
-    // }
+        // let test_data = {
+        //     "root": [
+        //         {
+        //             "key": "0",
+        //             "data": {"name": "Applications", "size": "100kb", "type": "Folder"},
+        //             "children": [{
+        //                 "key": "0-0",
+        //                 "data": {"name": "React", "size": "25kb", "type": "Folder"},
+        //                 "children": [{
+        //                     "key": "0-0-0",
+        //                     "data": {"name": "react.app", "size": "10kb", "type": "Application"}
+        //                 }, {
+        //                     "key": "0-0-1",
+        //                     "data": {"name": "native.app", "size": "10kb", "type": "Application"}
+        //                 }, {"key": "0-0-2", "data": {"name": "mobile.app", "size": "5kb", "type": "Application"}}]
+        //             }, {"key": "0-1", "data": {"name": "editor.app", "size": "25kb", "type": "Application"}}, {
+        //                 "key": "0-2",
+        //                 "data": {"name": "settings.app", "size": "50kb", "type": "Application"}
+        //             }]
+        //         },
+        //         {
+        //             "key": "1",
+        //             "data": {"name": "Cloud", "size": "20kb", "type": "Folder"},
+        //             "children": [{
+        //                 "key": "1-0",
+        //                 "data": {"name": "backup-1.zip", "size": "10kb", "type": "Zip"}
+        //             }, {"key": "1-1", "data": {"name": "backup-2.zip", "size": "10kb", "type": "Zip"}}]
+        //         },
+        //         {
+        //             "key": "2",
+        //             "data": {"name": "Desktop", "size": "150kb", "type": "Folder"},
+        //             "children": [{
+        //                 "key": "2-0",
+        //                 "data": {"name": "note-meeting.txt", "size": "50kb", "type": "Text"}
+        //             }, {"key": "2-1", "data": {"name": "note-todo.txt", "size": "100kb", "type": "Text"}}]
+        //         },
+        //         {
+        //             "key": "3",
+        //             "data": {"name": "Documents", "size": "75kb", "type": "Folder"},
+        //             "children": [{
+        //                 "key": "3-0",
+        //                 "data": {"name": "Work", "size": "55kb", "type": "Folder"},
+        //                 "children": [{
+        //                     "key": "3-0-0",
+        //                     "data": {"name": "Expenses.doc", "size": "30kb", "type": "Document"}
+        //                 }, {"key": "3-0-1", "data": {"name": "Resume.doc", "size": "25kb", "type": "Resume"}}]
+        //             }, {
+        //                 "key": "3-1",
+        //                 "data": {"name": "Home", "size": "20kb", "type": "Folder"},
+        //                 "children": [{"key": "3-1-0", "data": {"name": "Invoices", "size": "20kb", "type": "Text"}}]
+        //             }]
+        //         },
+        //         {
+        //             "key": "4",
+        //             "data": {"name": "Downloads", "size": "25kb", "type": "Folder"},
+        //             "children": [{
+        //                 "key": "4-0",
+        //                 "data": {"name": "Spanish", "size": "10kb", "type": "Folder"},
+        //                 "children": [{
+        //                     "key": "4-0-0",
+        //                     "data": {"name": "tutorial-a1.txt", "size": "5kb", "type": "Text"}
+        //                 }, {"key": "4-0-1", "data": {"name": "tutorial-a2.txt", "size": "5kb", "type": "Text"}}]
+        //             }, {
+        //                 "key": "4-1",
+        //                 "data": {"name": "Travel", "size": "15kb", "type": "Text"},
+        //                 "children": [{
+        //                     "key": "4-1-0",
+        //                     "data": {"name": "Hotel.pdf", "size": "10kb", "type": "PDF"}
+        //                 }, {"key": "4-1-1", "data": {"name": "Flight.pdf", "size": "5kb", "type": "PDF"}}]
+        //             }]
+        //         },
+        //         {
+        //             "key": "5",
+        //             "data": {"name": "Main", "size": "50kb", "type": "Folder"},
+        //             "children": [{"key": "5-0", "data": {"name": "bin", "size": "50kb", "type": "Link"}}, {
+        //                 "key": "5-1",
+        //                 "data": {"name": "etc", "size": "100kb", "type": "Link"}
+        //             }, {"key": "5-2", "data": {"name": "var", "size": "100kb", "type": "Link"}}]
+        //         },
+        //         {
+        //             "key": "6",
+        //             "data": {"name": "Other", "size": "5kb", "type": "Folder"},
+        //             "children": [{"key": "6-0", "data": {"name": "todo.txt", "size": "3kb", "type": "Text"}}, {
+        //                 "key": "6-1",
+        //                 "data": {"name": "logo.png", "size": "2kb", "type": "Picture"}
+        //             }]
+        //         },
+        //         {
+        //             "key": "7",
+        //             "data": {"name": "Pictures", "size": "150kb", "type": "Folder"},
+        //             "children": [{
+        //                 "key": "7-0",
+        //                 "data": {"name": "barcelona.jpg", "size": "90kb", "type": "Picture"}
+        //             }, {"key": "7-1", "data": {"name": "primeng.png", "size": "30kb", "type": "Picture"}}, {
+        //                 "key": "7-2",
+        //                 "data": {"name": "prime.jpg", "size": "30kb", "type": "Picture"}
+        //             }]
+        //         },
+        //         {
+        //             "key": "8",
+        //             "data": {"name": "Videos", "size": "1500kb", "type": "Folder"},
+        //             "children": [{
+        //                 "key": "8-0",
+        //                 "data": {"name": "primefaces.mkv", "size": "1000kb", "type": "Video"}
+        //             }, {"key": "8-1", "data": {"name": "intro.avi", "size": "500kb", "type": "Video"}}]
+        //         }
+        //     ]
+        // }
 
 
-    this.setState({my_vaccines : data["my_vaccines"]});
+        this.setState({my_vaccines: data["my_vaccines"]});
 
-    // let friend = {  "name": "Ayberk", "surname" : "Uslu", "Age": 22, "withFriendsSince" : "15.02.2021", "vaccines" : [ "covid19", "asi1", "asi2", "asi3"]
-    //              }
+        // let friend = {  "name": "Ayberk", "surname" : "Uslu", "Age": 22, "withFriendsSince" : "15.02.2021", "vaccines" : [ "covid19", "asi1", "asi2", "asi3"]
+        //              }
 
     }
 
 
-        async getData() {
+    async getData() {
 
         // NOT WORKING!!!!!!! yet..
-        let data = await axios.get(BASE_URL+"/mycodes", {headers: {
-        'APIKEY' : "api_key",
-        'Access-Control-Allow-Origin': '*'}
+        let data = await axios.get(BASE_URL + "/mycodes", {
+            headers: {
+                'APIKEY': "api_key",
+                'Access-Control-Allow-Origin': '*'
+            }
         })
-        console.log("Data : ",data);
+        console.log("Data : ", data);
         let codes = data.data.content
         console.log("My Codes ", codes)
         return codes
     }
 
 
-
-        formSubmissionsTemplate(data) {
+    formSubmissionsTemplate(data) {
         // let values = Object.values(data["vaccines"]);
         let values = data["vaccines"];
-                // console.log(data["vaccines"])
-                // console.log("Values : ", values)
+        // console.log(data["vaccines"])
+        // console.log("Values : ", values)
         return (
             <div className="orders-subtable">
                 {/*<h5>Submissions for {data.form_id}</h5>*/}
@@ -205,11 +234,9 @@ export class MyCodes extends React.Component {
     }
 
 
-    generateQRCode(){
+    generateQRCode() {
         console.log("Generate QR Code !!!");
     }
-
-
 
 
     render() {
@@ -224,7 +251,7 @@ export class MyCodes extends React.Component {
             <div className="p-fluid p-formgrid p-grid">
                 <div className="p-field p-col">
                     There are {selectedVaccinesCount} selected vaccine(s) out of {vaccinesCount} vaccine(s) <br/>
-                    Select the forms then click the Generate button.
+                    Select the vaccines then click the Generate button.
                 </div>
                 <div className="p-field p-col">
                     <Button label="Generate" onClick={this.generateQRCode}/>
@@ -234,33 +261,33 @@ export class MyCodes extends React.Component {
         return (<div>
 
 
+                <div className="card">
+                    <h5>Checkbox</h5>
 
-            <div className="card">
-                <h5>Checkbox</h5>
+                    <DataTable value={this.state.my_vaccines}
+                               selection={this.state.selected_vaccines}
+                               onSelectionChange={e => this.setState({selected_vaccines: e.value})}
+                               dataKey="id"
+                               footer={footer_my_vaccines}>
+                        <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                        <Column field="id" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="date" header="Date"></Column>
+                        <Column field="dose" header="Dose"></Column>
+                        <Column field="vaccine_point" header="Vaccine Point"></Column>
+                        <Column field="expires_in" header="Expires in"></Column>
+                    </DataTable>
+                </div>
+                <div className="card">
 
-                <DataTable value={this.state.my_vaccines}
-                           selection={this.state.selected_vaccines}
-                           onSelectionChange={e => this.setState({selected_vaccines:e.value})}
-                           dataKey="id"
-                           footer={footer_my_vaccines}>
-                    <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
-                    <Column field="id" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="date" header="Date"></Column>
-                    <Column field="dose" header="Dose"></Column>
-                    <Column field="vaccine_point" header="Vaccine Point"></Column>
-                    <Column field="expires_in" header="Expires in"></Column>
-                </DataTable>
-            </div>            <div className="card">
+                    <h2>QR-Code</h2>
 
-                        <h2>QR-Code</h2>
+                    <QRCode value="http://facebook.github.io/react/"/>
 
-                <QRCode value="http://facebook.github.io/react/" />
-
-            </div>
+                </div>
 
 
-                <Button label="Test button"  />
+                <Button label="Test button"/>
 
             </div>
         );
