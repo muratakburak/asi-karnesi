@@ -8,27 +8,24 @@ import {Button} from "primereact/button";
 
 class PersonalBar extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
+    constructor() {
+        super();
+        this.state = {};
 
-    };
+        this.componentDidMount = this.componentDidMount.bind(this);
+    }
 
-    this.componentDidMount = this.componentDidMount.bind(this);
-  }
-
-  async componentDidMount() {
+    async componentDidMount() {
 
 
+    }
 
-  }
-
-  getPersonalInformation(){
+    getPersonalInformation() {
 
 
-  }
+    }
 
-      onSignIn(googleUser) {
+    onSignIn(googleUser) {
         console.log("googleUser")
         console.log(googleUser)
 
@@ -57,15 +54,13 @@ class PersonalBar extends React.Component {
     }
 
 
+    render() {
 
 
+        return (
+            <div style={{margin: "10px"}}>
 
-
-  render() {
-
-
-    return (
-        <div style={{margin:"10px"}}>
+                This area can include some information about logged in user!! like name picture etc.
                 <GoogleLogin
                     clientId={clientId}
                     buttonText="Login"
@@ -76,11 +71,12 @@ class PersonalBar extends React.Component {
                     isSignedIn={true}
                 />
 
-                                <Button label="Test button" onClick={this.testButton} />
+                <Button label="Test button" onClick={this.testButton}/>
 
-        </div>
+            </div>
 
-    )
-  }
+        )
+    }
 }
+
 export default PersonalBar
