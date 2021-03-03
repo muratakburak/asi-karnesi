@@ -66,19 +66,19 @@ export class Home extends React.Component {
                 {/*<div className="g-signin2" data-onsuccess="onSignIn"/>*/}
 
 
-                Check console Logs for google auth details!!
+                {/*Check console Logs for google auth details!!*/}
 
-                <GoogleLogin
-                    clientId={clientId}
-                    buttonText="Login"
-                    onSuccess={this.onSignIn}
-                    // onFailure={onFailure}
-                    cookiePolicy={'single_host_origin'}
-                    style={{marginTop: '100px'}}
-                    isSignedIn={true}
-                />
+                {/*<GoogleLogin*/}
+                {/*    clientId={clientId}*/}
+                {/*    buttonText="Login"*/}
+                {/*    onSuccess={this.onSignIn}*/}
+                {/*    // onFailure={onFailure}*/}
+                {/*    cookiePolicy={'single_host_origin'}*/}
+                {/*    style={{marginTop: '100px'}}*/}
+                {/*    isSignedIn={true}*/}
+                {/*/>*/}
 
-                <Button label="Test button" onClick={this.testButton} />
+                {/*<Button label="Test button" onClick={this.testButton} />*/}
 
             </div>
         );

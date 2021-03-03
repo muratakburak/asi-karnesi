@@ -6,11 +6,13 @@ import {put_storage, get_storage} from "../../services/StorageUtil";
 import {TreeTable} from "primereact/treetable";
 import {Column} from "primereact/column";
 import {DataTable} from "primereact/datatable";
+import QRCode from "qrcode.react"
+import {TabPanel} from "primereact/tabview";
 
 
 // import '../App.css';
 
-export class MyFriends extends React.Component {
+export class MyCodes extends React.Component {
 
     constructor() {
         super();
@@ -202,35 +204,11 @@ export class MyFriends extends React.Component {
 
                My Friends
             <div className="card">
-                {/*<h5>Multiple with MetaKey</h5>*/}
-                <DataTable
-                    value={this.state.friends}
-                    selectionMode="multiple"
-                    // selectionKeys={this.state.selected_friends}
-                    selection={this.state.selected_friends}
-                    onSelectionChange={e => this.setState({selected_friends : e.value})}
-                    metaKeySelection={false}
-                    // metaKeySelection
-                    paginator={true}
-                    // paginatorLeft={paginatorLeft}
-                    // header={submissionsHeader}
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} friends"
-                    rows={10}
-                    rowsPerPageOptions={[5, 10, 20]} style={{margin: "10px"}}
-                    dataKey="id"
-                    rowExpansionTemplate={this.formSubmissionsTemplate}
-                    expandedRows={this.state.expanded_friends_row}
-                    onRowToggle={(e) => this.setState({expanded_friends_row: e.data})}
-                    onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse}
-                    emptyMessage="There is no submission yet!"
-                >
-                    <Column  expander></Column>
-                    <Column field="id" header="ID" ></Column>
-                    <Column field="name" header="Name" ></Column>
-                    <Column field="surname" header="Size"></Column>
-                    {/*<Column field="type" header="Type"></Column>*/}
-                </DataTable>
+
+                        <h2>QR-Code</h2>
+
+                <QRCode value="http://facebook.github.io/react/" />
+
             </div>
 
 
@@ -241,4 +219,4 @@ export class MyFriends extends React.Component {
     }
 }
 
-export default MyFriends;
+export default MyCodes;
