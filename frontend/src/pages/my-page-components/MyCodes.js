@@ -1,5 +1,8 @@
 import React from 'react';
-// import GoogleLogin from "react-google-login";
+import axios from 'axios'
+
+import {BASE_URL, HEADER,BUILD_HEADER} from "../../services/base_service";
+
 // import {clientId} from "../../services/base_service";
 import {Button} from "primereact/button";
 import {put_storage, get_storage} from "../../services/StorageUtil";
@@ -19,9 +22,8 @@ export class MyCodes extends React.Component {
 
         this.state = {
 
-            friends : [],
-            selected_friends : [],
-            expanded_friends_row: null,
+            my_vaccines : [],
+            selected_vaccines : [],
 
             // login : new Login(),
 
@@ -37,13 +39,11 @@ export class MyCodes extends React.Component {
 
     console.log(google_user)
         let data = {
-            // "name" : "Ayberk Uslu",
-            // "my_infos" : "asda",
-                "friends":[
-                    {  "id" : 0,"name": "Ayberk", "surname" : "Uslu", "Age": 22, "withFriendsSince" : "15.02.2021", "vaccines" : [{"vaccine": "covid19"}, {"vaccine": "asi1"}, {"vaccine": "asi2"}, {"vaccine": "asi3"}]} ,
-                    {  "id" : 1, "name": "Ayberk2", "surname" : "Uslu2", "Age": 22, "withFriendsSince" :"15.02.2021", "vaccines" : [{"vaccine": "covid19"}, {"vaccine": "asi1"}, {"vaccine": "asi2"}, {"vaccine": "asi3"}]} ,
-                    {  "id" : 2, "name": "Ayberk3", "surname" : "Uslu3", "Age": 22, "withFriendsSince" :"15.02.2021", "vaccines" : [{"vaccine": "covid19"}, {"vaccine": "asi1"}, {"vaccine": "asi2"}, {"vaccine": "asi3"}]} ,
-                    {  "id" : 3, "name": "Ayberk4", "surname" : "Uslu4", "Age": 22, "withFriendsSince" :"15.02.2021", "vaccines" : [{"vaccine": "covid19"}, {"vaccine": "asi1"}, {"vaccine": "asi2"}, {"vaccine": "asi3"}]}
+                "my_vaccines":[
+                    {  "id" : 0,"name": "COVID-19", "date" : "15.02.2019", "dose": "1", "vaccine_point" : "Ankara Merkez", "expires_in" : "364"} ,
+                    {  "id" : 1,"name": "COVID-20", "date" : "15.02.2020", "dose": "1", "vaccine_point" : "Istranbul Merkez", "expires_in" : "255"} ,
+                    {  "id" : 2,"name": "COVID-21", "date" : "15.02.2021", "dose": "1", "vaccine_point" : "Eskisehir Merkez", "expires_in" : "321"} ,
+                    {  "id" : 3,"name": "COVID-22", "date" : "15.02.2022", "dose": "1", "vaccine_point" : "Adana Merkez", "expires_in" : "0"} ,
                 ]
         };
 
@@ -157,11 +157,25 @@ export class MyCodes extends React.Component {
     // }
 
 
-    this.setState({friends : data["friends"]});
+    this.setState({my_vaccines : data["my_vaccines"]});
 
     // let friend = {  "name": "Ayberk", "surname" : "Uslu", "Age": 22, "withFriendsSince" : "15.02.2021", "vaccines" : [ "covid19", "asi1", "asi2", "asi3"]
     //              }
 
+    }
+
+
+        async getData() {
+
+        // NOT WORKING!!!!!!! yet..
+        let data = await axios.get(BASE_URL+"/mycodes", {headers: {
+        'APIKEY' : "api_key",
+        'Access-Control-Allow-Origin': '*'}
+        })
+        console.log("Data : ",data);
+        let codes = data.data.content
+        console.log("My Codes ", codes)
+        return codes
     }
 
 
@@ -191,6 +205,11 @@ export class MyCodes extends React.Component {
     }
 
 
+    generateQRCode(){
+        console.log("Generate QR Code !!!");
+    }
+
+
 
 
     render() {
@@ -198,12 +217,41 @@ export class MyCodes extends React.Component {
         //     Submissions for {(this.state.selectedFormDetail) ? this.state.selectedFormDetail : ""}
         // </div>;
 
+        let vaccinesCount = this.state.my_vaccines ? this.state.my_vaccines.length : 0;
+        let selectedVaccinesCount = this.state.selected_vaccines ? this.state.selected_vaccines.length : 0;
+
+        let footer_my_vaccines =
+            <div className="p-fluid p-formgrid p-grid">
+                <div className="p-field p-col">
+                    There are {selectedVaccinesCount} selected vaccine(s) out of {vaccinesCount} vaccine(s) <br/>
+                    Select the forms then click the Generate button.
+                </div>
+                <div className="p-field p-col">
+                    <Button label="Generate" onClick={this.generateQRCode}/>
+                </div>
+            </div>;
+
         return (<div>
 
 
 
-               My Friends
             <div className="card">
+                <h5>Checkbox</h5>
+
+                <DataTable value={this.state.my_vaccines}
+                           selection={this.state.selected_vaccines}
+                           onSelectionChange={e => this.setState({selected_vaccines:e.value})}
+                           dataKey="id"
+                           footer={footer_my_vaccines}>
+                    <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                    <Column field="id" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="date" header="Date"></Column>
+                    <Column field="dose" header="Dose"></Column>
+                    <Column field="vaccine_point" header="Vaccine Point"></Column>
+                    <Column field="expires_in" header="Expires in"></Column>
+                </DataTable>
+            </div>            <div className="card">
 
                         <h2>QR-Code</h2>
 
