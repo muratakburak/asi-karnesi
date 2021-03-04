@@ -3,6 +3,7 @@ import GoogleLogin from "react-google-login";
 import {clientId} from "../../services/base_service";
 import {get_storage, put_storage} from "../../services/StorageUtil";
 import {Button} from "primereact/button";
+import styles from '../../css/divs.css';
 
 // import axios from "axios";
 
@@ -11,11 +12,13 @@ class PersonalBar extends React.Component {
     constructor() {
         super();
         this.state = {
-            name : null,
-            email : null,
+            name: null,
+            email: null,
+            image: null,
         };
 
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.onSignIn = this.onSignIn.bind(this);
     }
 
     async componentDidMount() {
@@ -35,16 +38,16 @@ class PersonalBar extends React.Component {
         put_storage('google_user', googleUser);
 
 
-
         // console.log("From storage : ")
         // console.log(get_storage("google_user"))
         //
         var profile = googleUser.getBasicProfile();
 
         let g_name = profile.getName();
-        this.setState({name:g_name});
+        this.setState({name: g_name});
         let g_email = profile.getEmail();
-        this.setState({email:g_email})
+        this.setState({email: g_email})
+        this.setState({image: profile.getImageUrl()})
 
         // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         // put_storage('google_tokenId', googleUser.tokenId);
@@ -65,27 +68,55 @@ class PersonalBar extends React.Component {
     }
 
 
+    render() {
 
 
-  render() {
+        return (
+            <div style={styles.personalbar}>
 
 
-    return (
-            <div style={{margin:"10px"}}>
-      
-                 This area can include some information about logged in user!! like name picture etc.
-                {this.state.name}
-                 <br/>
-                {this.state.email}
-                <GoogleLogin
-                    clientId={clientId}
-                    buttonText="Login"
-                    onSuccess={this.onSignIn}
-                    // onFailure={onFailure}
-                    cookiePolicy={'single_host_origin'}
-                    style={{marginTop: '100px'}}
-                    isSignedIn={true}
-                />
+                <div className="p-grid">
+                    <div className="p-col-2">
+
+
+                        {this.state.name}
+
+
+                    </div>
+                    <div className="p-col-5">
+
+                        This area can include some information about logged in user!! like name picture etc...
+
+
+                    </div>
+                    <div className="p-col-4">
+
+                        {this.state.email}
+                    </div>
+                    <div className="p-col-1">
+
+                        <img
+                            style={{height: "7vh", borderRadius: "2px"}}
+                            src={this.state.image}
+                            alt="new"
+                        />
+
+                        <GoogleLogin
+                            clientId={clientId}
+                            buttonText="Login"
+                            onSuccess={this.onSignIn}
+                            // onFailure={onFailure}
+                            cookiePolicy={'single_host_origin'}
+                            style={{margin: '10px'}}
+                            isSignedIn={true}
+                        />
+
+                    </div>
+                </div>
+
+
+                <br/>
+
 
                 <Button label="Test button" onClick={this.testButton}/>
 
