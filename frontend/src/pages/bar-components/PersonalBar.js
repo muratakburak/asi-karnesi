@@ -10,7 +10,10 @@ class PersonalBar extends React.Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            name : null,
+            email : null,
+        };
 
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -31,10 +34,18 @@ class PersonalBar extends React.Component {
 
         put_storage('google_user', googleUser);
 
+
+
         // console.log("From storage : ")
         // console.log(get_storage("google_user"))
         //
-        // var profile = googleUser.getBasicProfile();
+        var profile = googleUser.getBasicProfile();
+
+        let g_name = profile.getName();
+        this.setState({name:g_name});
+        let g_email = profile.getEmail();
+        this.setState({email:g_email})
+
         // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         // put_storage('google_tokenId', googleUser.tokenId);
         // console.log('Name: ' + profile.getName());
@@ -63,6 +74,9 @@ class PersonalBar extends React.Component {
             <div style={{margin:"10px"}}>
       
                  This area can include some information about logged in user!! like name picture etc.
+                {this.state.name}
+                 <br/>
+                {this.state.email}
                 <GoogleLogin
                     clientId={clientId}
                     buttonText="Login"
