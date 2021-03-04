@@ -24,12 +24,15 @@ export class MyCodes extends React.Component {
 
             my_vaccines: [],
             selected_vaccines: [],
+            qr_hidden: true,
+            qr_value: "",
 
             // login : new Login(),
 
         };
 
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.generateQRCode = this.generateQRCode.bind(this);
 
     }
 
@@ -236,6 +239,9 @@ export class MyCodes extends React.Component {
 
     generateQRCode() {
         console.log("Generate QR Code !!!");
+        this.setState({qr_hidden:false});
+        let qr_new = this.state.qr_value + "/TEST";
+        this.setState({qr_value:qr_new})
     }
 
 
@@ -278,16 +284,16 @@ export class MyCodes extends React.Component {
                         <Column field="expires_in" header="Expires in"></Column>
                     </DataTable>
                 </div>
-                <div className="card">
+                <div className="card" hidden={this.state.qr_hidden} >
 
                     <h2>QR-Code</h2>
 
-                    <QRCode value="http://facebook.github.io/react/"/>
+                    <QRCode value={this.state.qr_value}/>
 
                 </div>
 
 
-                <Button label="Test button"/>
+                {/*<Button label="Test button"/>*/}
 
             </div>
         );

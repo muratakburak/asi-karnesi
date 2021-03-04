@@ -201,7 +201,7 @@ export class MyFriends extends React.Component {
 
 
                My Friends
-            <div className="card">
+            {/*<div className="card">*/}
                 {/*<h5>Multiple with MetaKey</h5>*/}
                 <DataTable
                     value={this.state.friends}
@@ -231,10 +231,9 @@ export class MyFriends extends React.Component {
                     <Column field="surname" header="Size"></Column>
                     {/*<Column field="type" header="Type"></Column>*/}
                 </DataTable>
-            </div>
+            {/*</div>*/}
 
 
-                <Button label="Test button"  />
 
             </div>
         );

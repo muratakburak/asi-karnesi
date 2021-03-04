@@ -89,11 +89,11 @@ class PersonalBar extends React.Component {
 
 
                     </div>
-                    <div className="p-col-4">
+                    <div className="p-col-3">
 
                         {this.state.email}
                     </div>
-                    <div className="p-col-1">
+                    <div className="p-col-2">
 
                         <img
                             style={{height: "7vh", borderRadius: "2px"}}
@@ -107,7 +107,7 @@ class PersonalBar extends React.Component {
                             onSuccess={this.onSignIn}
                             // onFailure={onFailure}
                             cookiePolicy={'single_host_origin'}
-                            style={{margin: '10px'}}
+                            style={{height: "7vh",margin: '10px'}}
                             isSignedIn={true}
                         />
 
@@ -118,7 +118,7 @@ class PersonalBar extends React.Component {
                 <br/>
 
 
-                <Button label="Test button" onClick={this.testButton}/>
+                {/*<Button label="Test button" onClick={this.testButton}/>*/}
 
             </div>
 
