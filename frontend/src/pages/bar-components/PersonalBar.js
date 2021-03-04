@@ -96,7 +96,7 @@ class PersonalBar extends React.Component {
                     <div className="p-col-2">
 
                         <img
-                            style={{height: "7vh", borderRadius: "2px"}}
+                            style={{height: "7vh", borderRadius: "55%"}}
                             src={this.state.image}
                             alt="new"
                         />

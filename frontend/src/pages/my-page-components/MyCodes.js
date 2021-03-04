@@ -11,6 +11,7 @@ import {Column} from "primereact/column";
 import {DataTable} from "primereact/datatable";
 import QRCode from "qrcode.react"
 import {TabPanel} from "primereact/tabview";
+import {Panel} from "primereact/panel";
 
 
 // import '../App.css';
@@ -26,6 +27,7 @@ export class MyCodes extends React.Component {
             selected_vaccines: [],
             qr_hidden: true,
             qr_value: "",
+            panelCollapsed : false,
 
             // login : new Login(),
 
@@ -239,9 +241,11 @@ export class MyCodes extends React.Component {
 
     generateQRCode() {
         console.log("Generate QR Code !!!");
-        this.setState({qr_hidden:false});
+        this.setState({qr_hidden: false});
         let qr_new = this.state.qr_value + "/TEST";
-        this.setState({qr_value:qr_new})
+        this.setState({qr_value: qr_new})
+
+         this.setState({panelCollapsed: true})
     }
 
 
@@ -268,23 +272,28 @@ export class MyCodes extends React.Component {
 
 
                 <div className="card">
-                    <h5>Checkbox</h5>
+                    {/*<h5>Checkbox</h5>*/}
+                    <Panel header="My Vaccines" toggleable collapsed={this.state.panelCollapsed}
+                           onToggle={(e) => this.setState({panelCollapsed: e.value})}
+                           >
+                        <DataTable value={this.state.my_vaccines}
+                                   selection={this.state.selected_vaccines}
+                                   onSelectionChange={e => this.setState({selected_vaccines: e.value})}
+                                   dataKey="id"
+                                   footer={footer_my_vaccines}>
+                            <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                            <Column field="id" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="date" header="Date"></Column>
+                            <Column field="dose" header="Dose"></Column>
+                            <Column field="vaccine_point" header="Vaccine Point"></Column>
+                            <Column field="expires_in" header="Expires in"></Column>
+                        </DataTable>
 
-                    <DataTable value={this.state.my_vaccines}
-                               selection={this.state.selected_vaccines}
-                               onSelectionChange={e => this.setState({selected_vaccines: e.value})}
-                               dataKey="id"
-                               footer={footer_my_vaccines}>
-                        <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
-                        <Column field="id" header="Code"></Column>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="date" header="Date"></Column>
-                        <Column field="dose" header="Dose"></Column>
-                        <Column field="vaccine_point" header="Vaccine Point"></Column>
-                        <Column field="expires_in" header="Expires in"></Column>
-                    </DataTable>
+                    </Panel>
+
                 </div>
-                <div className="card" hidden={this.state.qr_hidden} >
+                <div className="card" hidden={this.state.qr_hidden}>
 
                     <h2>QR-Code</h2>
 
