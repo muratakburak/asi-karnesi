@@ -8,6 +8,8 @@ import {TabMenu} from "primereact/tabmenu";
 import {Home} from "./pages/Home"
 import {Page2} from "./pages/Page2"
 import {MyPage} from "./pages/MyPage"
+import {Groups} from "./pages/Groups"
+import {Group} from "./pages/Group"
 
 // import reportWebVitals from './reportWebVitals';
 
@@ -16,6 +18,8 @@ import {MyPage} from "./pages/MyPage"
             // {label: 'Home', icon: 'pi pi-fw pi-home', url: '/'},
             {label: 'Home', icon: 'pi pi-fw pi-calendar', url: 'home'},
             {label: 'My Profile', icon: 'pi pi-fw pi-calendar', url: 'me'},
+            {label: 'My Groups', icon: 'pi pi-fw pi-pencil',url : 'groups'},
+            
             {label: 'Page2', icon: 'pi pi-fw pi-pencil',url : 'page2'},
             // {label: 'Add Person', icon: 'pi pi-fw pi-pencil',url : 'AddPerson'},
         ]
@@ -39,6 +43,8 @@ const routing = (
             <Route path="/" component={App} />
             <Route path="/home" component={Home} />
             <Route path="/me" component={MyPage} />
+            <Route path="/Groups" component={Groups} />
+            <Route path="/Group/:groupid" component={Group} />
             <Route path="/Page2" component={Page2} />
             {/*<Route path="/AddPerson" component={AddPerson} />*/}
         </div>
